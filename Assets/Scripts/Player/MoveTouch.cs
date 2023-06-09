@@ -27,11 +27,14 @@ public class MoveTouch : Singleton<MoveTouch>
                {    // sol
                     if (x < 0)
                     {
+                         PlayerMovement.Instance.SetMoveType(MoveType.LEFT);
                          PlayerMovement.Instance.MoveCharacter(Vector3.left);
+                         
                     }
                     // sağ
                     else
                     {
+                         PlayerMovement.Instance.SetMoveType(MoveType.RIGHT);
                          PlayerMovement.Instance.MoveCharacter(Vector3.right);
 
                     }
@@ -40,11 +43,13 @@ public class MoveTouch : Singleton<MoveTouch>
                {  // aşağı
                     if (y < 0)
                     {
+                         PlayerMovement.Instance.SetMoveType(MoveType.BACK);
                          PlayerMovement.Instance.MoveCharacter(Vector3.back);
 
                     }   // yukarı
                     else
                     {
+                         PlayerMovement.Instance.SetMoveType(MoveType.FORWARD);
                          PlayerMovement.Instance.MoveCharacter(Vector3.forward);
                     }
                }

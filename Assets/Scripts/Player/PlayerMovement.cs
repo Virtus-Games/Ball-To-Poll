@@ -10,6 +10,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
      [SerializeField] private CharacterController Cc;
      [SerializeField] private Collider bounds;
 
+     private MoveType _moveType;
+
+     internal void SetMoveType(MoveType moveType){
+          _moveType = moveType;
+     }
+     internal MoveType GetMoveType(){
+          return _moveType;
+     }
+
+
+     internal Bounds GetBounds()
+     {
+          return bounds.bounds;
+     }
+
 
      private void Start()
      {
@@ -18,6 +33,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
      internal void MoveCharacter(Vector3 direction)
      {
-          Cc.Move(direction * moveDistance);
+          if (PlayerCollider.Instance.IsMoveActive())
+               Cc.Move(direction * moveDistance);
      }
 }

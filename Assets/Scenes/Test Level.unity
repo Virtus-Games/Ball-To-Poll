@@ -845,6 +845,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9965579755b25b341a4c53a2c08895f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceX: 1
+  distanceY: 1
+  colliderRay: {fileID: 7533853651419559492, guid: c99749318d3aeae48ac2bf9feffc6831,
+    type: 3}
+  colliderRays: []
 --- !u!114 &431942753
 MonoBehaviour:
   m_ObjectHideFlags: 0
