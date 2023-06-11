@@ -17,15 +17,12 @@ public class PlayerCollider : Singleton<PlayerCollider>
      [SerializeField] private float distanceY;
      public ColliderRay colliderRay;
      public List<ColliderRay> colliderRays;
+     public float yDistance = 1;
 
+     private void Start() => InstantColliders();
 
-
-     private void Start()
+     private void OnTriggerEnter(Collider other)
      {
-          InstantColliders();
-     }
-
-     private void OnTriggerEnter(Collider other) {
           if (other.gameObject.TryGetComponent(out Interactable interactable)) interactable.Started();
      }
 
@@ -59,11 +56,11 @@ public class PlayerCollider : Singleton<PlayerCollider>
           colliderRays.Add(_RightRaycast);
           colliderRays.Add(_ForwardRaycast);
 
-          foreach (ColliderRay collider in colliderRays)  collider.transform.SetParent(transform);
+          foreach (ColliderRay collider in colliderRays) collider.transform.SetParent(transform);
      }
 
-     private Vector3 DistanceX(Vector3 pos, float distance) => new Vector3(pos.x + distance, pos.y, pos.z);
-     private Vector3 DistanceY(Vector3 pos, float distance) => new Vector3(pos.x, pos.y, pos.z + distance);
+     private Vector3 DistanceX(Vector3 pos, float distance) => new Vector3(pos.x + distance, yDistance, pos.z);
+     private Vector3 DistanceY(Vector3 pos, float distance) => new Vector3(pos.x, yDistance, pos.z + distance);
 
      public bool IsMoveActive()
      {

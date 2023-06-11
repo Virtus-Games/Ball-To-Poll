@@ -8,7 +8,6 @@ public class DoorState : MonoBehaviour, Interactable, IAnimation
 
      private void Start()
      {
-          SetTrigger(CloseButtonTrigger());
      }
 
      public void Endend()

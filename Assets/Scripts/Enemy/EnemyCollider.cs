@@ -12,7 +12,7 @@ public class EnemyCollider : MonoBehaviour, ICollider
 {
      [Header("Enemy")]
      public EnemyMovement enemyMovement;
-
+     public EnemyAttack enemyAttack;
      [Header("Rays")]
      [SerializeField] private List<ColliderRay> rays;
      private bool _isSearch = false;
@@ -20,46 +20,44 @@ public class EnemyCollider : MonoBehaviour, ICollider
      public bool IsSearch { get => _isSearch; set => _isSearch = value; }
      public MoveType MoveTypeAtRay { get => _moveTypeAtRay; set => _moveTypeAtRay = value; }
 
-
      public void MoveActiveAtRay()
      {
           if (!_isSearch)
+          {
                foreach (ColliderRay item in rays)
+               {
                     if (item.moveType == _moveTypeAtRay && item.ControllerHit())
                          enemyMovement.Move(item.moveType);
+               }
+          }
      }
 
      public void Search()
      {
           foreach (ColliderRay item in rays)
           {
-               IsSearch = item.SearchingGround();
-               if (IsSearch)
+               if (item.moveType == MoveType.FORWARD && item.SearchPlayer() != null)
                {
-                    MoveTypeAtRay = item.moveType;
-                    IsSearch = false;
+                    _isSearch = true;
+                    enemyAttack.Attack(item.SearchPlayer());
                     break;
                }
-          }
-     }
-     public void EveryTimeSearch()
-     {
-          if (_moveTypeAtRay == MoveType.RIGHT || _moveTypeAtRay == MoveType.LEFT) return;
-
-          foreach (ColliderRay item in rays)
-          {
-               if (item.moveType == MoveType.RIGHT && _moveTypeAtRay != MoveType.RIGHT)
+               else
                {
-                    if (RayControl(item)) break;
+                    IsSearch = item.SearchingGround();
+                    if (IsSearch)
+                    {
+                         MoveTypeAtRay = item.moveType;
+                         IsSearch = false;
+                         break;
+                    }
                }
-               else if (item.moveType == MoveType.LEFT && _moveTypeAtRay != MoveType.LEFT)
-                    if (RayControl(item)) break;
           }
      }
+
 
      private void Update()
      {
-          EveryTimeSearch();
           MoveActiveAtRay();
      }
      public bool RayControl(ColliderRay item)
@@ -78,4 +76,25 @@ public class EnemyCollider : MonoBehaviour, ICollider
 
           return false;
      }
+
+
+     // public void LeftOrRight()
+     // {
+     //      if (_moveTypeAtRay == MoveType.RIGHT || _moveTypeAtRay == MoveType.LEFT)
+     //           return;
+
+     //      foreach (ColliderRay item in rays)
+     //      {
+     //           if (item.moveType == MoveType.RIGHT && _moveTypeAtRay != MoveType.RIGHT)
+     //           {
+     //                if (RayControl(item)) { }
+     //                break;
+     //           }
+     //           else if (item.moveType == MoveType.LEFT && _moveTypeAtRay != MoveType.LEFT)
+     //           {
+     //                if (RayControl(item)) { }
+     //                break;
+     //           }
+     //      }
+     // }
 }

@@ -5,44 +5,27 @@ public class ColliderRay : MonoBehaviour
      private float raycastDistance = 10f;
      private float rayLength = 10f;
      internal bool isMoveActive;
-     internal MoveType moveType;
+     public MoveType moveType;
 
      internal bool ControllerHit()
      {
-          RaycastHit hit;
-
-          if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance))
+          if (GetHitObject() != null && GetHitObject().TryGetComponent(out Ground ground))
           {
-               GameObject hitObject = hit.collider.gameObject;
-
-               if (hitObject.TryGetComponent(out Ground ground))
-               {
-                    if (transform.root.gameObject.TryGetComponent(out ICollider collider)) collider.MoveTypeAtRay = moveType;
-                    return true;
-               }
-               else
-               {
-                    SearchCollider();
-                    return false;
-               }
+               if (transform.root.gameObject.TryGetComponent(out ICollider collider)) collider.MoveTypeAtRay = moveType;
+               return true;
           }
           else
           {
-               SearchCollider();
+               if (transform.root.gameObject.TryGetComponent(out ICollider collider))
+               {
+                    collider.IsSearch = true;
+                    collider.Search();
+               }
                return false;
           }
      }
 
-     private void SearchCollider()
-     {
-          if (transform.root.gameObject.TryGetComponent(out ICollider collider))
-          {
-               collider.IsSearch = true;
-               collider.Search();
-          }
-     }
-
-     internal bool SearchingGround()
+     private GameObject GetHitObject()
      {
           RaycastHit hit;
 
@@ -50,13 +33,27 @@ public class ColliderRay : MonoBehaviour
           {
                GameObject hitObject = hit.collider.gameObject;
 
-               if (hitObject.TryGetComponent(out Ground ground))
-                    return true;
-               else
-                    return false;
+               if (hitObject != null) return hitObject;
+               else return null;
           }
+          else return null;
+     }
 
-          return false;
+
+
+     internal bool SearchingGround()
+     {
+          if (GetHitObject() != null && GetHitObject().TryGetComponent(out Ground ground))
+               return true;
+          else
+               return false;
+     }
+     internal GameObject SearchPlayer()
+     {
+          if (GetHitObject() != null && GetHitObject().TryGetComponent(out PlayerCollider playerCollider))
+               return GetHitObject();
+          else
+               return null;
      }
 
      private void OnDrawGizmos() => Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
