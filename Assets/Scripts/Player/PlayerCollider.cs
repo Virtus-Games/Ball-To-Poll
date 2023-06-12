@@ -23,19 +23,9 @@ public class PlayerCollider : Singleton<PlayerCollider>
 
      private void OnTriggerEnter(Collider other)
      {
-          if (other.gameObject.TryGetComponent(out Interactable interactable)) interactable.Started();
+          if (other.gameObject.TryGetComponent(out Interactable interactable))
+               interactable.StatusController();
      }
-
-     private void OnTriggerStay(Collider other)
-     {
-          // if (other.gameObject.TryGetComponent(out Interactable interactable)) interactable.Uptaded();
-     }
-
-     private void OnTriggerExit(Collider other)
-     {
-          if (other.gameObject.TryGetComponent(out Interactable interactable)) interactable.Endend();
-     }
-
 
      private void InstantColliders()
      {
@@ -48,6 +38,7 @@ public class PlayerCollider : Singleton<PlayerCollider>
 
           ColliderRay _ForwardRaycast = Instantiate(colliderRay, (DistanceY(pos, distanceY)), Quaternion.identity);
           _ForwardRaycast.moveType = MoveType.FORWARD;
+          
           ColliderRay _BackRaycast = Instantiate(colliderRay, (DistanceY(pos, -distanceY)), Quaternion.identity);
           _BackRaycast.moveType = MoveType.BACK;
 

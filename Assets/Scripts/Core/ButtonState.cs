@@ -1,42 +1,42 @@
 using UnityEngine;
 
 
-public interface Interactable
-{
-     public void Uptaded();
-     public void Started();
-     public void Endend();
-     public bool isEndendHave();
-}
 
-public interface IAnimation
-{
-     public string OpenButtonTrigger();
-     public string CloseButtonTrigger();
-}
-
-public class ButtonState : MonoBehaviour, Interactable, IAnimation
+public class ButtonState : MonoBehaviour, Interactable, IAnimation, IWalkable
 {
      [SerializeField] private Animator animator;
      [SerializeField] private DoorState doorState;
+
+     private bool status = false;
+     public bool Status { get => status; set => status = value; }
 
      public string CloseButtonTrigger() => "Close";
      public string OpenButtonTrigger() => "Open";
 
      public void Endend()
      {
-          if (doorState.isEndendHave()) animator.SetTrigger(CloseButtonTrigger());
+          animator.SetTrigger(CloseButtonTrigger());
+                    doorState.StatusController();
+
+
      }
      public void Started()
      {
           animator.SetTrigger(OpenButtonTrigger());
-          doorState.Started();
+          doorState.StatusController();
      }
+
      public void Uptaded()
      {
 
      }
 
-     public bool isEndendHave() => true;
+     public void StatusController()
+     {
+          Status = !Status;
 
+          if (Status) Started();
+          else Endend();
+
+     }
 }

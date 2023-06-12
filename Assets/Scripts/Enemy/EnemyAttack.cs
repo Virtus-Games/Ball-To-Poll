@@ -3,7 +3,12 @@ using UnityEngine;
 public class EnemyAttack : MonoBehaviour
 {
 
-     public AnimationController enemyAnimation;
+     private AnimationController enemyAnimation;
+
+     private void Start()
+     {
+          enemyAnimation = GetComponent<AnimationController>();
+     }
      public void Attack(GameObject player)
      {
           enemyAnimation.SetTrigger("attack");

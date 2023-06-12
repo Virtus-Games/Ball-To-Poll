@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 185481895847809928}
   - component: {fileID: 798667596932940312}
   - component: {fileID: 7601759338272662645}
-  - component: {fileID: 2623515290616564046}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -113,12 +112,12 @@ Transform:
   m_GameObject: {fileID: 8883552147296471978}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.23, y: 1.101, z: -0.72}
-  m_LocalScale: {x: 0.99999994, y: 1.0004772, z: 1.0004772}
+  m_LocalScale: {x: 1, y: 1.0004772, z: 1.0004772}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 705728632130966664}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5250109746406622221
 MonoBehaviour:
@@ -136,6 +135,10 @@ MonoBehaviour:
   moveDistance: 5
   Rb: {fileID: 7601759338272662645}
   bounds: {fileID: 0}
+  duration: 0.2
+  numJumps: 1
+  jumpPower: 2
+  jmpVector: {x: 0, y: 0, z: 0}
 --- !u!114 &185481895847809928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +156,7 @@ MonoBehaviour:
   colliderRay: {fileID: 7533853651419559492, guid: c99749318d3aeae48ac2bf9feffc6831,
     type: 3}
   colliderRays: []
+  yDistance: 2
 --- !u!135 &798667596932940312
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -201,16 +205,3 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2623515290616564046
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8883552147296471978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3938dee64385f6142b0708d1578c2aaa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}

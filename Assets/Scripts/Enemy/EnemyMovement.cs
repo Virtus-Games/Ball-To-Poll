@@ -1,14 +1,23 @@
 using UnityEngine;
+using DG.Tweening;
+
+
 
 public class EnemyMovement : MonoBehaviour
 {
-     [SerializeField] private Rigidbody rb;
+     public AnimationController animationController;
      public float speed = 3;
+
+     private void Start()
+     {
+     }
+
      internal void Move(MoveType type)
      {
           switch (type)
           {
                case MoveType.FORWARD:
+               
                     transform.Translate(Vector3.forward * speed * Time.deltaTime);
                     break;
                case MoveType.BACK:

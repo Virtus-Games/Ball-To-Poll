@@ -1,32 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
-public class PlayerMovement : Singleton<PlayerMovement>
+public interface IGround
+{
+     public Vector3 itemGroundPosition { get; set; }
+}
+
+public class PlayerMovement : Singleton<PlayerMovement>, IGround
 {
 
-     public float speed = 5f;
-     [SerializeField] private float moveDistance = 5f;
-     [SerializeField] private Rigidbody Rb;
-     [SerializeField] private Collider bounds;
+     [Header("Jump Settings")]
+     [SerializeField] private float duration;
+     [SerializeField] private int numJumps;
+     [SerializeField] private float jumpPower;
+     private Vector3 JumpVector;
+     public Vector3 itemGroundPosition { get => JumpVector; set => JumpVector = value; }
 
+     [Header("Move Settings")]
+     private float yStartPos = 0;
      private MoveType _moveType;
-
-     internal void SetMoveType(MoveType moveType) => _moveType = moveType;
      internal MoveType GetMoveType() => _moveType;
-
-
-     internal Bounds GetBounds() => bounds.bounds;
+     internal void SetMoveType(MoveType moveType) => _moveType = moveType;
 
 
      private void Start()
      {
-          moveDistance = bounds.bounds.size.x / speed;
+          DOTween.Init();
+          yStartPos = transform.position.y;
      }
 
-     internal void MoveCharacter(Vector3 direction)
+     internal void MoveCharacter()
      {
           if (PlayerCollider.Instance.IsMoveActive())
-               transform.Translate(direction * moveDistance);
+               transform.DOJump(Jump(), jumpPower, numJumps, duration);
+
      }
+
+     private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
 }

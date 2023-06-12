@@ -1,37 +1,72 @@
 using UnityEngine;
+using System.Collections;
+using DG.Tweening;
+using System;
 
-public class DoorState : MonoBehaviour, Interactable, IAnimation
+public class DoorState : ARaycastManager, Interactable
 {
-     [SerializeField] private Animator animator;
      [SerializeField] private bool openDoor = false;
+     public float duration;
+     public float YValue = 90;
+     public bool Status { get => openDoor; set => openDoor = value; }
+     public Transform doorObje;
 
-
-     private void Start()
-     {
-     }
 
      public void Endend()
      {
-          if (isEndendHave()) SetTrigger(CloseButtonTrigger());
+          StartCoroutine(RotationMovement(-YValue));
+
+     }
+
+     private void Start()
+     {
+          ground().isMoveActive = openDoor;
      }
 
 
      public void Started()
      {
-          if (!openDoor)
-               SetTrigger(OpenButtonTrigger());
-            
-          openDoor = true;
+          if (ground().isMoveActive)
+               StartCoroutine(RotationMovement(YValue));
      }
 
-     public void Uptaded()
+
+     internal Ground ground()
+     {
+          GetHitObject().TryGetComponent(out Ground ground);
+          return ground;
+     }
+
+     IEnumerator RotationMovement(float yValue)
      {
 
+          Vector3 rotate = doorObje.rotation.eulerAngles;
+          rotate.y += yValue;
+          bool rotated = false;
+          while (!rotated)
+          {
+               doorObje.DORotate(rotate, duration).OnComplete(() =>
+               {
+                    rotated = true;
+               });
+               yield return null;
+          }
+
      }
 
-     public string CloseButtonTrigger() => "Close";
-     public string OpenButtonTrigger() => "Open";
-     private void SetTrigger(string str) => animator.SetTrigger(str);
-     public bool isEndendHave() => false;
+     public void StatusController()
+     {
+          Status = !Status;
 
+          if (Status)
+          {
+               ground().isMoveActive = true;
+               Started();
+          }
+          else
+          {
+               ground().isMoveActive = false;
+               Endend();
+          }
+     }
 }

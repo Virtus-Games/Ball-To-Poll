@@ -17,44 +17,47 @@ public class MoveTouch : Singleton<MoveTouch>
 
      private void MoveToPlayer()
      {
-          if (swipeDelta.magnitude > deadZone)
+          if (tap)
           {
-               // evet geçtik
-               float x = swipeDelta.x;
-               float y = swipeDelta.y;
+               if (swipeDelta.magnitude > deadZone)
+               {
+                    // evet geçtik
+                    float x = swipeDelta.x;
+                    float y = swipeDelta.y;
 
-               if (Mathf.Abs(x) > Mathf.Abs(y))
-               {    // sol
-                    if (x < 0)
-                    {
-                         PlayerMovement.Instance.SetMoveType(MoveType.LEFT);
-                         PlayerMovement.Instance.MoveCharacter(Vector3.left);
-                         
+                    if (Mathf.Abs(x) > Mathf.Abs(y))
+                    {    // sol
+                         if (x < 0)
+                         {
+                              PlayerMovement.Instance.SetMoveType(MoveType.LEFT);
+                              PlayerMovement.Instance.MoveCharacter();
+
+                         }
+                         // sağ
+                         else
+                         {
+                              PlayerMovement.Instance.SetMoveType(MoveType.RIGHT);
+                              PlayerMovement.Instance.MoveCharacter();
+
+                         }
                     }
-                    // sağ
                     else
-                    {
-                         PlayerMovement.Instance.SetMoveType(MoveType.RIGHT);
-                         PlayerMovement.Instance.MoveCharacter(Vector3.right);
+                    {  // aşağı
+                         if (y < 0)
+                         {
+                              PlayerMovement.Instance.SetMoveType(MoveType.BACK);
+                              PlayerMovement.Instance.MoveCharacter();
 
+                         }   // yukarı
+                         else
+                         {
+                              PlayerMovement.Instance.SetMoveType(MoveType.FORWARD);
+                              PlayerMovement.Instance.MoveCharacter();
+                         }
                     }
-               }
-               else
-               {  // aşağı
-                    if (y < 0)
-                    {
-                         PlayerMovement.Instance.SetMoveType(MoveType.BACK);
-                         PlayerMovement.Instance.MoveCharacter(Vector3.back);
 
-                    }   // yukarı
-                    else
-                    {
-                         PlayerMovement.Instance.SetMoveType(MoveType.FORWARD);
-                         PlayerMovement.Instance.MoveCharacter(Vector3.forward);
-                    }
+                    startTouch = swipeDelta = Vector2.zero;
                }
-
-               startTouch = swipeDelta = Vector2.zero;
           }
      }
 
@@ -69,6 +72,7 @@ public class MoveTouch : Singleton<MoveTouch>
           else if (Input.GetMouseButtonUp(0))
           {
                startTouch = swipeDelta = Vector2.zero;
+               tap = false;
           }
 
           #endregion
@@ -84,13 +88,14 @@ public class MoveTouch : Singleton<MoveTouch>
                else if (Input.touches[0].phase == TouchPhase.Ended || Input.touches[0].phase == TouchPhase.Canceled)
                {
                     startTouch = swipeDelta = Vector2.zero;
+                    tap = false;
                }
-
           }
+
 
           #endregion
           // Mesafeyi hesaplıyoruz
-
+          
           swipeDelta = Vector2.zero;
           if (startTouch != Vector2.zero)
           {

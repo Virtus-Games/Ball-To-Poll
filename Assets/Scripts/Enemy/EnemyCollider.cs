@@ -5,20 +5,27 @@ public interface ICollider
 {
      MoveType MoveTypeAtRay { get; set; }
      bool IsSearch { get; set; }
+     void ChangeMoveType(MoveType moveType);
      public void Search();
 }
 
 public class EnemyCollider : MonoBehaviour, ICollider
 {
      [Header("Enemy")]
-     public EnemyMovement enemyMovement;
-     public EnemyAttack enemyAttack;
+     private EnemyMovement enemyMovement;
+     private EnemyAttack enemyAttack;
      [Header("Rays")]
      [SerializeField] private List<ColliderRay> rays;
      private bool _isSearch = false;
-     private MoveType _moveTypeAtRay;
      public bool IsSearch { get => _isSearch; set => _isSearch = value; }
+     private MoveType _moveTypeAtRay = MoveType.FORWARD;
      public MoveType MoveTypeAtRay { get => _moveTypeAtRay; set => _moveTypeAtRay = value; }
+
+     private void Start()
+     {
+          enemyMovement = GetComponent<EnemyMovement>();
+          enemyAttack = GetComponent<EnemyAttack>();
+     }
 
      public void MoveActiveAtRay()
      {
@@ -28,6 +35,7 @@ public class EnemyCollider : MonoBehaviour, ICollider
                {
                     if (item.moveType == _moveTypeAtRay && item.ControllerHit())
                          enemyMovement.Move(item.moveType);
+
                }
           }
      }
@@ -75,6 +83,15 @@ public class EnemyCollider : MonoBehaviour, ICollider
           }
 
           return false;
+     }
+
+     public void ChangeMoveType(MoveType moveType)
+     {
+          if (moveType == MoveType.FORWARD)
+               MoveTypeAtRay = MoveType.BACK;
+          else if (moveType == MoveType.BACK)
+               MoveTypeAtRay = MoveType.FORWARD;
+
      }
 
 
