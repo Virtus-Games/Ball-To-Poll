@@ -1,15 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface ICollider
-{
-     MoveType MoveTypeAtRay { get; set; }
-     bool IsSearch { get; set; }
-     void ChangeMoveType(MoveType moveType);
-     public void Search();
-}
 
-public class EnemyCollider : MonoBehaviour, ICollider
+
+public class EnemyCollider : MonoBehaviour, ICollider, IManagerMove
 {
      [Header("Enemy")]
      private EnemyMovement enemyMovement;
@@ -63,6 +57,10 @@ public class EnemyCollider : MonoBehaviour, ICollider
           }
      }
 
+     private void onCollisionEnter(Collider other) {
+          
+     }
+
 
      private void Update()
      {
@@ -92,6 +90,14 @@ public class EnemyCollider : MonoBehaviour, ICollider
           else if (moveType == MoveType.BACK)
                MoveTypeAtRay = MoveType.FORWARD;
 
+     }
+
+     public void Run()
+     {
+     }
+
+     public void Stop()
+     {
      }
 
 

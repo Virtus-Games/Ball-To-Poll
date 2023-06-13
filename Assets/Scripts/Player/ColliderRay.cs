@@ -1,22 +1,7 @@
 using UnityEngine;
 
 
-public abstract class ARaycastManager : MonoBehaviour
-{
-     public float raycastDistance = 10f;
-     internal GameObject GetHitObject()
-     {
-          RaycastHit hit;
 
-          if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance))
-          {
-               GameObject hitObject = hit.collider.gameObject;
-               if (hitObject != null) return hitObject;
-               else return null;
-          }
-          else return null;
-     }
-}
 
 
 public class ColliderRay : ARaycastManager

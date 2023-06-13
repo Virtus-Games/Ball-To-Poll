@@ -1,12 +1,8 @@
 using DG.Tweening;
 using UnityEngine;
 
-public interface IGround
-{
-     public Vector3 itemGroundPosition { get; set; }
-}
 
-public class PlayerMovement : Singleton<PlayerMovement>, IGround
+public class PlayerMovement : Singleton<PlayerMovement>,IManagerMove
 {
 
      [Header("Jump Settings")]
@@ -37,4 +33,14 @@ public class PlayerMovement : Singleton<PlayerMovement>, IGround
      }
 
      private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
+
+     public void Run()
+     {
+          MoveCharacter();
+     }
+
+     public void Stop()
+     {
+          throw new System.NotImplementedException();
+     }
 }
