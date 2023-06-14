@@ -17,7 +17,7 @@ public class LevelManager : MonoBehaviour
     
     internal void NextLevel()
     {
-        
+        PlaceObjects();
     }
     
    
