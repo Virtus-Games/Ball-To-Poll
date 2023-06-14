@@ -1,0 +1,10 @@
+{
+  "name": "com.moenengames.jujubemapeditor",
+  "displayName": "Jujube Map Editor",
+  "version": "1.0.0",
+  "unity": "2019.4",
+  "description": "Block-based map editor for 3d games",
+  "type": "tool",
+  "hideInEditor": false,
+  "dependencies": { }
+}

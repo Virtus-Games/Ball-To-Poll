@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c267556d7f0cd745928e2244716498e, type: 3}
+  m_Name: Demo Palette - Winter
+  m_EditorClassIdentifier: 
+  m_Failback: {fileID: 2858367890853885865, guid: 1a0fc306204c21e479205156a6267fa8,
+    type: 3}
+  m_Prefabs:
+  - {fileID: 8156923612806908108, guid: f5478255aadf62147b996bba44b7f247, type: 3}
+  - {fileID: 4387804680363883472, guid: d2c1eafcf5cb0f541921c0b40a501417, type: 3}
+  - {fileID: 3696570681585217935, guid: 8e1164c52ed9c3c438275af7198a90c7, type: 3}
+  - {fileID: 5203775738695432330, guid: 91d68bf5ea82cdb4d81fec9bbec2c82b, type: 3}
+  - {fileID: 6348141204247252326, guid: e4b7536de3f2cb44bb701b08a61b4678, type: 3}
+  - {fileID: 4663813990414254674, guid: 3abf505932e56a94ba00441087f687c6, type: 3}
+  - {fileID: 2972572605547502690, guid: 9dc9ab1bec79c9f4a857d3d0eda06026, type: 3}
+  - {fileID: 2416989573384594930, guid: 10d51e55409136d469b9cb90edff4c1e, type: 3}
+  - {fileID: 4006699113939603586, guid: 5de6d97efe6ad9a47a1a5c08a09bb897, type: 3}
+  - {fileID: 6715293325410975279, guid: a63b7b3672dc89c49a6b5c4d1742cc50, type: 3}
+  - {fileID: 326304912871283807, guid: ea775bcb8108e5a48b3269e34a6436c5, type: 3}
+  - {fileID: 1679273539979662842, guid: a6eb838004ea9534fabdd09c814f7b9b, type: 3}
+  - {fileID: 2147861285397261643, guid: fbf2abd13f0930146950f3929caa9062, type: 3}
+  - {fileID: 4602110659786640579, guid: dc1705c4303090742a55a4b6b61649cd, type: 3}
+  - {fileID: 2147861285397261643, guid: 13e3420b9b5c0c74781d165535004525, type: 3}
+  - {fileID: 7654600947056973220, guid: 8f7021f9217171b4cb61e81f54e79d42, type: 3}
+  - {fileID: 4550555952150308590, guid: bf3914f59e49a154989849839a7acecf, type: 3}
+  - {fileID: 748520208729898905, guid: 6c4d1d12f94b7ea4ba923404eada91dd, type: 3}
+  - {fileID: 4550555952150308590, guid: 9d5b99f28c1bfdf4bbee7216ea944357, type: 3}
+  - {fileID: 7452973138125339162, guid: b7cb4b2cdeb47b64ba79cbaf3a3f1e37, type: 3}
+  - {fileID: 2858367890853885865, guid: 860c025fe49b86c40b69a2cb5511938b, type: 3}

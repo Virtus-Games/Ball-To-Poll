@@ -1,0 +1,18 @@
+{
+    "name": "JujubeMapEditor.Editor",
+    "rootNamespace": "JujubeMapEditor.Editor",
+    "references": [
+        "JujubeMapEditor.Core"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

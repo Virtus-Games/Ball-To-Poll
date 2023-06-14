@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c267556d7f0cd745928e2244716498e, type: 3}
+  m_Name: Demo Palette - Summer
+  m_EditorClassIdentifier: 
+  m_Failback: {fileID: 2858367890853885865, guid: 1a0fc306204c21e479205156a6267fa8,
+    type: 3}
+  m_Prefabs:
+  - {fileID: 8156923612806908108, guid: d1f4af7d19e789b4d8d76fc9c2881a4b, type: 3}
+  - {fileID: 4387804680363883472, guid: 9aab80156ed9f3d4d9adbae513f68ec5, type: 3}
+  - {fileID: 669831783708513551, guid: 6885e5cfe2c7d214baf382f0e6288310, type: 3}
+  - {fileID: 3878351652842805535, guid: 1dd79cdac9c72dd468fd1203571a3f4b, type: 3}
+  - {fileID: 519567767307142275, guid: f6f32ef7b809a2d4697dd0fd9cce53aa, type: 3}
+  - {fileID: 4663813990414254674, guid: 8fc89a7bc08a6fa43879fbd2cba51cfe, type: 3}
+  - {fileID: 2972572605547502690, guid: 8e19840904e43c24bbfb2f361fb7364f, type: 3}
+  - {fileID: 2416989573384594930, guid: a84418f2d1f635043b53584af334bbf0, type: 3}
+  - {fileID: 3430957752807561398, guid: ce9fb9adb1373a443a2401a2d63461ae, type: 3}
+  - {fileID: 3997354846141248724, guid: 295927343d7908842ad7daf1c46c2b87, type: 3}
+  - {fileID: 6859000982711493488, guid: 0f469dd2140090040b278597a6ef9d56, type: 3}
+  - {fileID: 6196056909733352913, guid: 63b658e6da3d10741bc4874e209b7895, type: 3}
+  - {fileID: 2147861285397261643, guid: b8ce49b514b2409408ac37dfb9838d5b, type: 3}
+  - {fileID: 4602110659786640579, guid: e692f7231ec96754d9ab00c1e0bd6009, type: 3}
+  - {fileID: 2147861285397261643, guid: 2f1b03ed5e483be4eb2689825e78f0a8, type: 3}
+  - {fileID: 7654600947056973220, guid: 976eac7d21b81924e9220e899e168810, type: 3}
+  - {fileID: 4550555952150308590, guid: af713b7fae2abfd4f8cb34d3a9b6a03e, type: 3}
+  - {fileID: 911651023025161660, guid: 81ae98bc35e279b40a1ac5ae5da3a8c6, type: 3}
+  - {fileID: 2304673588929836946, guid: ff01c5a27a2ffc04f9a15929c85d9f44, type: 3}
+  - {fileID: 7452973138125339162, guid: baf4d079e974d294fa8fd27daf8bef33, type: 3}
+  - {fileID: 2858367890853885865, guid: 860c025fe49b86c40b69a2cb5511938b, type: 3}
