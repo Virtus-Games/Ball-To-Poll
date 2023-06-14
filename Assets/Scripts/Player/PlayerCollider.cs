@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,10 +13,10 @@ public enum MoveType
 public class PlayerCollider : Singleton<PlayerCollider>
 {
      [SerializeField] private float distanceX;
-     [SerializeField] private float distanceY;
-     public ColliderRay colliderRay;
-     public List<ColliderRay> colliderRays;
-     public float yDistance = 1;
+     [SerializeField] private float distanceZ;
+     public float yDistance = 1.128f;
+     public RayCollider colliderRay;
+     public List<RayCollider> colliderRays;
 
      private void Start() => InstantColliders();
 
@@ -27,19 +26,37 @@ public class PlayerCollider : Singleton<PlayerCollider>
                interactable.StatusController();
      }
 
+
+     public void IsMoveActive()
+     {
+          foreach (RayCollider item in colliderRays)
+          {
+               if (PlayerMovement.Instance.GetMoveType() == item.moveType)
+                    item.GetGroundIsHave();
+          }
+
+     }
+
+
+     private Vector3 DistanceX(Vector3 pos, float distance) => new Vector3(pos.x + distance, yDistance, pos.z);
+     private Vector3 DistanceZ(Vector3 pos, float distance) => new Vector3(pos.x, yDistance, pos.z + distance);
+
+
+
+
      private void InstantColliders()
      {
           Vector3 pos = transform.position;
 
-          ColliderRay _LeftRaycast = Instantiate(colliderRay, (DistanceX(pos, -distanceX)), Quaternion.identity);
+          RayCollider _LeftRaycast = Instantiate(colliderRay, (DistanceX(pos, -distanceX)), Quaternion.identity);
           _LeftRaycast.moveType = MoveType.LEFT;
-          ColliderRay _RightRaycast = Instantiate(colliderRay, (DistanceX(pos, distanceX)), Quaternion.identity);
+          RayCollider _RightRaycast = Instantiate(colliderRay, (DistanceX(pos, distanceX)), Quaternion.identity);
           _RightRaycast.moveType = MoveType.RIGHT;
 
-          ColliderRay _ForwardRaycast = Instantiate(colliderRay, (DistanceY(pos, distanceY)), Quaternion.identity);
+          RayCollider _ForwardRaycast = Instantiate(colliderRay, (DistanceZ(pos, distanceZ)), Quaternion.identity);
           _ForwardRaycast.moveType = MoveType.FORWARD;
-          
-          ColliderRay _BackRaycast = Instantiate(colliderRay, (DistanceY(pos, -distanceY)), Quaternion.identity);
+
+          RayCollider _BackRaycast = Instantiate(colliderRay, (DistanceZ(pos, -distanceZ)), Quaternion.identity);
           _BackRaycast.moveType = MoveType.BACK;
 
           colliderRays.Add(_BackRaycast);
@@ -47,18 +64,6 @@ public class PlayerCollider : Singleton<PlayerCollider>
           colliderRays.Add(_RightRaycast);
           colliderRays.Add(_ForwardRaycast);
 
-          foreach (ColliderRay collider in colliderRays) collider.transform.SetParent(transform);
-     }
-
-     private Vector3 DistanceX(Vector3 pos, float distance) => new Vector3(pos.x + distance, yDistance, pos.z);
-     private Vector3 DistanceY(Vector3 pos, float distance) => new Vector3(pos.x, yDistance, pos.z + distance);
-
-     public bool IsMoveActive()
-     {
-          foreach (ColliderRay item in colliderRays)
-               if (PlayerMovement.Instance.GetMoveType() == item.moveType)
-                    if (item.ControllerHit() == false) return false;
-
-          return true;
+          foreach (RayCollider collider in colliderRays) collider.transform.SetParent(transform);
      }
 }

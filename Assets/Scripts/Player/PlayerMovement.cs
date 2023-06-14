@@ -2,7 +2,7 @@ using DG.Tweening;
 using UnityEngine;
 
 
-public class PlayerMovement : Singleton<PlayerMovement>,IManagerMove
+public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
 {
 
      [Header("Jump Settings")]
@@ -17,7 +17,7 @@ public class PlayerMovement : Singleton<PlayerMovement>,IManagerMove
      private MoveType _moveType;
      internal MoveType GetMoveType() => _moveType;
      internal void SetMoveType(MoveType moveType) => _moveType = moveType;
-
+     public MoveType MoveType { get => _moveType; set => _moveType = value; }
 
      private void Start()
      {
@@ -25,12 +25,7 @@ public class PlayerMovement : Singleton<PlayerMovement>,IManagerMove
           yStartPos = transform.position.y;
      }
 
-     internal void MoveCharacter()
-     {
-          if (PlayerCollider.Instance.IsMoveActive())
-               transform.DOJump(Jump(), jumpPower, numJumps, duration);
-
-     }
+     internal void MoveCharacter() => transform.DOJump(Jump(), jumpPower, numJumps, duration);
 
      private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
 
@@ -41,6 +36,6 @@ public class PlayerMovement : Singleton<PlayerMovement>,IManagerMove
 
      public void Stop()
      {
-          throw new System.NotImplementedException();
+
      }
 }

@@ -30,14 +30,14 @@ public class MoveTouch : Singleton<MoveTouch>
                          if (x < 0)
                          {
                               PlayerMovement.Instance.SetMoveType(MoveType.LEFT);
-                              PlayerMovement.Instance.MoveCharacter();
+                              PlayerCollider.Instance.IsMoveActive();
 
                          }
                          // sağ
                          else
                          {
                               PlayerMovement.Instance.SetMoveType(MoveType.RIGHT);
-                              PlayerMovement.Instance.MoveCharacter();
+                              PlayerCollider.Instance.IsMoveActive();
 
                          }
                     }
@@ -45,14 +45,16 @@ public class MoveTouch : Singleton<MoveTouch>
                     {  // aşağı
                          if (y < 0)
                          {
+
                               PlayerMovement.Instance.SetMoveType(MoveType.BACK);
-                              PlayerMovement.Instance.MoveCharacter();
+                              PlayerCollider.Instance.IsMoveActive();
 
                          }   // yukarı
                          else
                          {
                               PlayerMovement.Instance.SetMoveType(MoveType.FORWARD);
-                              PlayerMovement.Instance.MoveCharacter();
+                              PlayerCollider.Instance.IsMoveActive();
+
                          }
                     }
 

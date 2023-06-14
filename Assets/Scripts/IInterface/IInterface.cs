@@ -4,11 +4,12 @@ using UnityEngine;
 public abstract class ARaycastManager : MonoBehaviour
 {
      public float raycastDistance = 10f;
+     public LayerMask layerMask;
      internal GameObject GetHitObject()
      {
           RaycastHit hit;
 
-          if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance))
+          if (Physics.Raycast(transform.position, Vector3.down, out hit, raycastDistance, layerMask))
           {
                GameObject hitObject = hit.collider.gameObject;
                if (hitObject != null) return hitObject;
@@ -16,6 +17,9 @@ public abstract class ARaycastManager : MonoBehaviour
           }
           else return null;
      }
+
+     private void OnDrawGizmos() => Debug.DrawRay(transform.position, Vector3.down * 10f, Color.red);
+
 }
 
 
@@ -45,7 +49,6 @@ public interface IAnimation
 
 public interface ICollider
 {
-     MoveType MoveTypeAtRay { get; set; }
      bool IsSearch { get; set; }
      void ChangeMoveType(MoveType moveType);
      public void Search();

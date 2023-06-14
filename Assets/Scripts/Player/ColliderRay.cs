@@ -39,8 +39,9 @@ public class ColliderRay : ARaycastManager
      private void ControllerHit(Transform ground)
      {
           // Enemy
-          if (transform.root.gameObject.TryGetComponent(out ICollider collider))
-               collider.MoveTypeAtRay = moveType;
+          if (transform.root.gameObject.TryGetComponent(out IManagerMove managerMove)){
+               
+          }
           // Player
           if (transform.parent.gameObject.TryGetComponent(out IGround iground))
                iground.itemGroundPosition = ground.transform.position;
@@ -63,6 +64,5 @@ public class ColliderRay : ARaycastManager
           else return null;
      }
 
-     private void OnDrawGizmos() => Debug.DrawRay(transform.position, Vector3.down * rayLength, Color.red);
 
 }
