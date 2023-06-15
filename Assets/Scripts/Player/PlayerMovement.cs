@@ -29,13 +29,21 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
 
      private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
 
-     public void Run()
-     {
-          MoveCharacter();
-     }
+     public void Run() => MoveCharacter();
 
      public void Stop()
      {
 
+     }
+
+
+     public void StopAndRotate()
+     {
+
+     }
+
+     public void ChangeMoveType()
+     {
+          throw new System.NotImplementedException();
      }
 }

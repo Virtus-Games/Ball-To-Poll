@@ -196,7 +196,7 @@ Transform:
   m_GameObject: {fileID: 5218225136855068249}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.80393, y: 5.176508, z: 18.359743}
-  m_LocalScale: {x: 0.38562444, y: 0.3856244, z: 0.38562444}
+  m_LocalScale: {x: 0.40363023, y: 0.40363017, z: 0.40363023}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 9010973663505639240}
@@ -205,7 +205,7 @@ Transform:
   - {fileID: 6642376644995884909}
   - {fileID: 6179808541458939745}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7018400274694057883
 MonoBehaviour:
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3938dee64385f6142b0708d1578c2aaa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isCharaackter: 1
+  isCharaackter: 0
 --- !u!114 &2294484302628428033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,8 +259,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rays:
-  - {fileID: 7122675071226397845}
-  - {fileID: 7101918085949642239}
+  - {fileID: 5654990199681570774}
+  - {fileID: 4039501950927504225}
 --- !u!95 &3948380591867312620
 Animator:
   serializedVersion: 5
@@ -291,7 +291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6642376644995884909}
-  - component: {fileID: 7122675071226397845}
+  - component: {fileID: 5654990199681570774}
   m_Layer: 0
   m_Name: Collider Ray Forward
   m_TagString: Untagged
@@ -307,14 +307,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7662210462065473014}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 1.86}
+  m_LocalPosition: {x: 0.01, y: 4.2, z: 1.53}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6594245289498687076}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7122675071226397845
+--- !u!114 &5654990199681570774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -323,9 +323,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 7662210462065473014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f8dce6947a44d44ac185e732e8ad21, type: 3}
+  m_Script: {fileID: 11500000, guid: 857d11e63c0b70a4fbdfda26ac64b486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastDistance: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
   moveType: 0
 --- !u!1 &8163281789778289410
 GameObject:
@@ -336,7 +340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6179808541458939745}
-  - component: {fileID: 7101918085949642239}
+  - component: {fileID: 4039501950927504225}
   m_Layer: 0
   m_Name: Collider Ray Back
   m_TagString: Untagged
@@ -352,14 +356,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8163281789778289410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2.11}
+  m_LocalPosition: {x: -0.01, y: 3.68, z: -1.82}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6594245289498687076}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7101918085949642239
+--- !u!114 &4039501950927504225
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,9 +372,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 8163281789778289410}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09f8dce6947a44d44ac185e732e8ad21, type: 3}
+  m_Script: {fileID: 11500000, guid: 857d11e63c0b70a4fbdfda26ac64b486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  raycastDistance: 10
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
   moveType: 1
 --- !u!1 &8581760474151209834
 GameObject:

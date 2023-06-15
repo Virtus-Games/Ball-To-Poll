@@ -11,7 +11,8 @@ public class EnemyAttack : MonoBehaviour
      }
      public void Attack(GameObject player)
      {
-          enemyAnimation.SetTrigger("attack");
+          
+          enemyAnimation.SetTrigger(enemyAnimation.ATTACK);
           // UI FAİL
           Destroy(player, 3f);
      }

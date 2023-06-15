@@ -3,6 +3,10 @@ using UnityEngine;
 [RequireComponent(typeof(Animator))]
 public class AnimationController : MonoBehaviour
 {
+     internal  string MOVE = "move";
+     internal  string DIE = "die";
+     internal string ATTACK = "attack";
+     internal string DAMAGE = "damage";
      public bool isCharaackter = false;
      private Animator animator;
 
@@ -15,19 +19,19 @@ public class AnimationController : MonoBehaviour
           animator.SetTrigger(trigger);
      }
 
-     public void Move(bool value)
+     public void Move()
      {
           if (!isCharaackter) return;
-          animator.SetBool("move", value);
+          animator.SetBool(MOVE, true);
      }
-     public void Idle(bool value)
+     public void Idle()
      {
           if (!isCharaackter) return;
-          animator.SetBool("idle", value);
+          animator.SetBool(MOVE, false);
      }
      public void Die(bool value)
      {
           if (!isCharaackter) return;
-          animator.SetBool("die", value);
+          animator.SetBool(DIE, value);
      }
 }

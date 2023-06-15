@@ -4,6 +4,8 @@ public interface IManagerMove
 {
      public void Run();
      public void Stop();
+     public void StopAndRotate();
+     public void ChangeMoveType();
      public Vector3 itemGroundPosition { get; set; }
      public MoveType MoveType { get; set; }
 
@@ -21,25 +23,30 @@ public class RayCollider : ARaycastManager
 
      public void GetGroundIsHave()
      {
-          if (GetHitObject() != null && GetHitObject().TryGetComponent(out Obstackle obstackle))
+
+          EnemyMoveSettings();
+          PlayerMoveSettings();
+
+          if (GetHitObject() != null && GetHitObject().TryGetComponent(out Obstackle obstackle) && move.MoveType == MoveType.FORWARD)
           {
-               move.Stop();
+               move.StopAndRotate();
                return;
           }
 
           if (GetHitObject() != null && GetHitObject().TryGetComponent(out IGround ground))
           {
-               EnemyMoveSettings();
-               PlayerMoveSettings();
-
                move.itemGroundPosition = GetHitObject().transform.position;
                move.MoveType = moveType;
-
                move.Run();
           }
           else
           {
-               move.Stop();
+               if (move.MoveType == MoveType.FORWARD) move.StopAndRotate();
+               else
+               {
+                    move.ChangeMoveType();
+                    move.Stop();
+               }
           }
      }
 
@@ -53,12 +60,14 @@ public class RayCollider : ARaycastManager
      private void EnemyMoveSettings()
      {
 
-
-
-
           if (GetHitObject() != null && GetHitObject().TryGetComponent(out PlayerCollider playerCollider))
           {
-
+               move.Stop();
+               
+               if (transform.parent.TryGetComponent(out EnemyAttack enemyAttack) && moveType == MoveType.FORWARD)
+               {
+                    enemyAttack.Attack(playerCollider.gameObject);
+               }
                // Attack Player
           }
 

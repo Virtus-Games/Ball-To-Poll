@@ -1,7 +1,9 @@
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyMovement : MonoBehaviour, IManagerMove
 {
+     public float Duration = 2f;
      public AnimationController animationController;
      private EnemyCollider enemyCollider;
      public float speed = 3;
@@ -10,9 +12,10 @@ public class EnemyMovement : MonoBehaviour, IManagerMove
      private MoveType _moveType;
      public MoveType MoveType { get => _moveType; set => _moveType = value; }
 
-     
-     private void Start() {
-           enemyCollider = GetComponent<EnemyCollider>();
+
+     private void Start()
+     {
+          enemyCollider = GetComponent<EnemyCollider>();
      }
 
      internal void Move()
@@ -30,10 +33,42 @@ public class EnemyMovement : MonoBehaviour, IManagerMove
 
      public void Run()
      {
+          if (IsCharackter()) animationController.Move();
+
           Move();
      }
 
      public void Stop()
+     {
+          if (IsCharackter()) animationController.Idle();
+     }
+
+     private bool IsCharackter()
+     {
+          if (animationController != null)
+               if (animationController.isCharaackter) return true;
+               else return false;
+          else return false;
+     }
+
+     public void StopAndRotate()
+     {
+          if (IsCharackter()) animationController.Idle();
+
+          enemyCollider.Stop = true;
+
+          Vector3 myRot = transform.rotation.eulerAngles;
+          myRot.y += 180;
+
+          transform.DORotate(myRot, Duration, RotateMode.Fast).OnComplete(() =>
+          {
+               enemyCollider.Stop = false;
+               Stop();
+          });
+
+     }
+
+     public void ChangeMoveType()
      {
           enemyCollider.ChangeMoveType();
      }
