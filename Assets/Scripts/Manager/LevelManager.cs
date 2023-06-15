@@ -113,7 +113,7 @@ public class LevelManagerCustom : Editor
 
           if (GUILayout.Button("Next Level"))
           {
-               UIManager.Instance.NextLevelButton();
+               // MenuItemManager.Instance.NextLevelButton();
           }
      }
 }

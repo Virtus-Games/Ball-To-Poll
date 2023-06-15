@@ -1,15 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MenuItemManager : Singleton<MenuItemManager>
+public class MenuItemManager : MonoBehaviour
 {
-     // StartPanel Component Button
-     public void TabToStart()
-     {
-          GameManagerProjects.Instance.UpdateGameState(GAMESTATE.PLAY);
-          
-     }
-
 
      // StartPanel Market Icon Component Button
      public void MarketButton()
@@ -78,21 +71,22 @@ public class MenuItemManager : Singleton<MenuItemManager>
      }
 
 
+     // StartPanel Component Button
+     public void PlayButton() => GameManagerProjects.Instance.UpdateGameState(GAMESTATE.PLAY);
 
-     public void NextLevel()
+     public void NextLevelButton()
      {
-          //UIManager.Instance.MoneyToMoneyParent();
+          PlayerData.playerData.coinCount += GameManagerProjects.Instance.CurrentLevelCoin;
+          PlayerData.Instance.Save();
+          LevelManager.Instance.SetLevelUp();
 
           GameManagerProjects.Instance.UpdateGameState(GAMESTATE.START);
-
-          LevelManager.Instance.SetLevelUp();
-          
      }
 
-     public void RestartLevel()
+     public void RestartLevelButton()
      {
           GameManagerProjects.Instance.UpdateGameState(GAMESTATE.START);
-          LevelManager.Instance.RestartLevel();
+          LevelManager.Instance.LevelLoad();
      }
 
 }

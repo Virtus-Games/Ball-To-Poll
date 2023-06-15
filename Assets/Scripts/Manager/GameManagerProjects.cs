@@ -5,10 +5,10 @@ using UnityEngine;
 [Serializable]
 public enum GAMESTATE
 {
-    START,
-    PLAY,
-    VICTORY,
-    DEFEAT,
+     START,
+     PLAY,
+     VICTORY,
+     DEFEAT,
      MARKET,
 }
 
@@ -16,59 +16,61 @@ public enum GAMESTATE
 public class GameManagerProjects : Singleton<GameManagerProjects>
 {
 
-    #region  Value Settings
+     #region  Value Settings
 
-    [HideInInspector]
-    public static event Action<GAMESTATE> OnGameStateChanged;
-    [HideInInspector]
-    public GAMESTATE gameState;
-    public bool isPlay;
-    public static event Action<bool> OnPlayerHaveInGame;
+     [HideInInspector]
+     public static event Action<GAMESTATE> OnGameStateChanged;
+     
+     [HideInInspector]
+     public GAMESTATE gameState;
 
-    private int _currentLevelCoin;
-    public int CurrentLevelCoin
-    {
-        get { return _currentLevelCoin; }
-        set { _currentLevelCoin += value; }
-    }
+     [HideInInspector]
+     public bool isPlay;
+     public static event Action<bool> OnPlayerHaveInGame;
 
-
-    #endregion
-
-    public void UpdateGameState(GAMESTATE state)
-    {
-        gameState = state;
+     private int _currentLevelCoin;
+     public int CurrentLevelCoin
+     {
+          get { return _currentLevelCoin; }
+          set { _currentLevelCoin += value; }
+     }
 
 
-        Debug.Log("Here");
+     #endregion
 
-        switch (gameState)
-        {
-            case GAMESTATE.START:
-                HandleStartAction();
-                break;
-            case GAMESTATE.PLAY:
-                isPlay = true;
+     public void UpdateGameState(GAMESTATE state)
+     {
+          gameState = state;
 
-                break;
-            case GAMESTATE.VICTORY:
-                isPlay = false;
-                break;
-            case GAMESTATE.DEFEAT:
-                isPlay = false;
-                break;
-        }
+          Debug.Log("Here To");
 
-        OnGameStateChanged?.Invoke(state);
-    }
-    private void Awake()
-    {
-    }
+          switch (gameState)
+          {
+               case GAMESTATE.START:
+                    HandleStartAction();
+                    isPlay = false;
+                    break;
+               case GAMESTATE.PLAY:
+                    isPlay = true;
+                    Debug.LogWarning("[MenuItemManager 2]");
+                    break;
+               case GAMESTATE.VICTORY:
+                    isPlay = false;
+                    break;
+               case GAMESTATE.DEFEAT:
+                    isPlay = false;
+                    break;
+          }
+
+          OnGameStateChanged?.Invoke(state);
+     }
+     private void Awake()
+     {
+     }
 
      #region Update States
 
      private void HandleStartAction() => CurrentLevelCoin = 0;
-
 
      #endregion
 
@@ -76,7 +78,7 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
 
      public void UpdatePlayerStatus(bool isHave) => OnPlayerHaveInGame?.Invoke(isHave);
 
-    #endregion  Player Status Manager
+     #endregion  Player Status Manager
 
 
 }
@@ -88,21 +90,21 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
 [CustomEditor(typeof(GameManagerProjects))]
 public class GameManagerEditor : Editor
 {
-    public GAMESTATE state;
+     public GAMESTATE state;
 
-    public override void OnInspectorGUI()
-    {
-        base.OnInspectorGUI();
-        GameManagerProjects gameManager = target as GameManagerProjects;
+     public override void OnInspectorGUI()
+     {
+          base.OnInspectorGUI();
+          GameManagerProjects gameManager = target as GameManagerProjects;
 
-        EditorGUILayout.LabelField("Editor Status");
+          EditorGUILayout.LabelField("Editor Status");
 
-        state = (GAMESTATE)EditorGUILayout.EnumPopup("Game State", state);
-        if (GUILayout.Button("Update Game State"))
-        {
-            gameManager.UpdateGameState(state);
-        }
-    }
+          state = (GAMESTATE)EditorGUILayout.EnumPopup("Game State", state);
+          if (GUILayout.Button("Update Game State"))
+          {
+               gameManager.UpdateGameState(state);
+          }
+     }
 
 }
 #endif

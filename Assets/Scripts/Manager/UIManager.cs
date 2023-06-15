@@ -97,21 +97,7 @@ public class UIManager : Singleton<UIManager>
         NoThanksButton.SetActive(value);
     }
 
-    public void PlayButton() => GameManagerProjects.Instance.UpdateGameState(GAMESTATE.PLAY);
 
-    public void NextLevelButton()
-    {
-        PlayerData.playerData.coinCount += GameManagerProjects.Instance.CurrentLevelCoin;
-        PlayerData.Instance.Save();
-        LevelManager.Instance.SetLevelUp();
-
-        GameManagerProjects.Instance.UpdateGameState(GAMESTATE.START);
-    }
-    public void RestartLevelButton()
-    {
-        GameManagerProjects.Instance.UpdateGameState(GAMESTATE.START);
-        LevelManager.Instance.LevelLoad();
-    }
 
     public void SettingsButton()
     {
