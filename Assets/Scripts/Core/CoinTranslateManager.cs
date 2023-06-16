@@ -21,7 +21,7 @@ public class CoinTranslateManager : Singleton<CoinTranslateManager>
      public TextMeshProUGUI coinElements;
 
      [Header("Events On Die")]
-     private List<GameObject> elements;
+     private List<GameObject> elements = new List<GameObject>();
      int count = 0;
 
 
