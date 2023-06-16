@@ -30,6 +30,7 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
      {
           DOTween.Init();
           yStartPos = transform.position.y;
+          FollowPlayer.Instance.SetPlayer();
      }
 
      internal void MoveCharacter()
