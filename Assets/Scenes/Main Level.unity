@@ -620,7 +620,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 541e059be62ebc6419cb11334212a1cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shakeDuration: 0.01
+  shakeAmount: 0.06
+  decreaseFactor: 0.2
   OffsetZ: 5
+  Offset: {x: 0, y: 0, z: 20}
   Speed: 2
   Player: {fileID: 0}
 --- !u!224 &1228560952 stripped

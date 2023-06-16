@@ -34,10 +34,11 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
      }
 
      internal void MoveCharacter()
-     {    
-          if(!GameManagerProjects.Instance.isPlay) return;
+     {
+          if (!GameManagerProjects.Instance.isPlay) return;
           if (stop) return;
           transform.DOJump(Jump(), jumpPower, numJumps, duration);
+          FollowPlayer.Instance.ShakeActive();
      }
      private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
 
@@ -62,7 +63,8 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
      public void ScaleMin()
      {
           stop = true;
-          transform.DOScale(Vector3.zero, ScaleDuration).OnComplete(()=>{
+          transform.DOScale(Vector3.zero, ScaleDuration).OnComplete(() =>
+          {
                GameManagerProjects.Instance.UpdateGameState(GAMESTATE.VICTORY);
           });
      }
