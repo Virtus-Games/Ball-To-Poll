@@ -23,30 +23,40 @@ public class RayCollider : ARaycastManager
 
      public void GetGroundIsHave()
      {
+          if(!GameManagerProjects.Instance.isPlay) return;
 
-          EnemyMoveSettings();
-          PlayerMoveSettings();
-
-          if (GetHitObject() != null && GetHitObject().TryGetComponent(out Obstackle obstackle) && move.MoveType == MoveType.FORWARD)
+          if (GetHitObject() != null)
           {
-               move.StopAndRotate();
-               return;
-          }
 
-          if (GetHitObject() != null && GetHitObject().TryGetComponent(out IGround ground))
-          {
-               move.itemGroundPosition = GetHitObject().transform.position;
-               move.MoveType = moveType;
-               move.Run();
+               PlayerMoveSettings();
+
+               if (EnemyAttackSettings()) return;
+
+               if (GetHitObject().TryGetComponent(out Obstackle obstackle) && move.MoveType == MoveType.FORWARD)
+               {
+                    move.StopAndRotate();
+                    return;
+               }
+
+               if (GetHitObject().TryGetComponent(out IGround ground))
+               {
+                    move.itemGroundPosition = GetHitObject().transform.position;
+                    move.MoveType = moveType;
+                    move.Run();
+               }
+
           }
           else
           {
-               if (move.MoveType == MoveType.FORWARD) move.StopAndRotate();
+
+               if (move.MoveType == MoveType.FORWARD)
+                    move.StopAndRotate();
                else
                {
                     move.ChangeMoveType();
                     move.Stop();
                }
+               
           }
      }
 
@@ -57,19 +67,19 @@ public class RayCollider : ARaycastManager
 
      }
 
-     private void EnemyMoveSettings()
+     private bool EnemyAttackSettings()
      {
 
-          if (GetHitObject() != null && GetHitObject().TryGetComponent(out PlayerCollider playerCollider))
+          if (GetHitObject().TryGetComponent(out PlayerCollider playerCollider))
           {
                move.Stop();
-               
+
                if (transform.parent.TryGetComponent(out EnemyAttack enemyAttack) && moveType == MoveType.FORWARD)
-               {
                     enemyAttack.Attack(playerCollider.gameObject);
-               }
-               // Attack Player
+
+               return true;
           }
 
+          return false;
      }
 }

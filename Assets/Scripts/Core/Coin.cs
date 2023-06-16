@@ -1,49 +1,57 @@
 using UnityEngine;
 using DG.Tweening;
-using GDTools.ObjectPooling;
 
 public class Coin : MonoBehaviour
 {
-    private bool IsPlay;
-    public float jumpVectorY = 5;
-    public float jumpForce = 5;
-    public int numbs = 1;
-    public float timeDuration = 2;
-    public float timeWaiting = 3;
-    private float _time = 0;
+     private bool IsPlay;
+     public float jumpVectorY = 5;
+     public float jumpForce = 5;
+     public int numbs = 1;
+     public float timeDuration = 2;
+     private bool justOne;
 
-    PoolObject poolObject;
+     private void OnTriggerEnter(Collider other)
+     {
+          if (other.GetComponent<PlayerCollider>() != null && !justOne)
+          {
+               Star(GetPos());
+               justOne = true;
+          }
 
-    private void Start()
-    {
-        _time = timeWaiting;
-        poolObject = GetComponent<PoolObject>();
-        Vector3 pos = new Vector3(transform.position.x, jumpVectorY, transform.position.z);
-        Sequence ence = transform.DOJump(pos, jumpForce, numbs, timeDuration).OnComplete(() =>
-        {
-            IsPlay = true;
-        });
-    }
+     }
 
-    void Update() => Play();
+     private Vector3 GetPos()
+     {
+          return new Vector3(transform.position.x, jumpVectorY, transform.position.z);
+     }
 
-    private void Play()
-    {
-        if (IsPlay)
-        {
-            _time -= 0.1f;
+     private void Star(Vector3 pos)
+     {
+          transform.DOJump(pos, jumpForce, numbs, timeDuration).OnUpdate(() =>
+          {
+               if (transform.position.y == jumpVectorY)
+                    IsPlay = true;
+          });
+     }
 
-            if (_time <= 0) TranslatetoObJToCanvasPoint();
 
-        }
-    }
+     void Update()
+     {
+          Play();
 
-    public void TranslatetoObJToCanvasPoint()
-    {
-        _time = timeWaiting;
-        transform.position = Camera.main.WorldToScreenPoint(transform.position);
-        IsPlay = false;
-        CoinTranslateManager.Instance.TransformMoney(transform.position);
-        CoinTranslateManager.Instance.CoinPrefabPool.DestroyObject(poolObject, 0.1f);
-    }
+     }
+     private void Play()
+     {
+          if (IsPlay) TranslatetoObJToCanvasPoint();
+     }
+
+     public void TranslatetoObJToCanvasPoint()
+     {
+          IsPlay = false;
+
+          Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
+
+          CoinTranslateManager.Instance.TransformMoney(pos);
+          Destroy(gameObject, 0.3f);
+     }
 }

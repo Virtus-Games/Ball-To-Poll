@@ -10,14 +10,21 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
      [SerializeField] private int numJumps;
      [SerializeField] private float jumpPower;
      private Vector3 JumpVector;
-     public Vector3 itemGroundPosition { get => JumpVector; set => JumpVector = value; }
 
      [Header("Move Settings")]
      private float yStartPos = 0;
+     public Vector3 itemGroundPosition { get => JumpVector; set => JumpVector = value; }
+     [SerializeField] private bool stop = false;
+     public float ScaleDuration;
+
+     [Header("Move Enum")]
      private MoveType _moveType;
-     internal MoveType GetMoveType() => _moveType;
-     internal void SetMoveType(MoveType moveType) => _moveType = moveType;
      public MoveType MoveType { get => _moveType; set => _moveType = value; }
+     internal void SetMoveType(MoveType moveType) => _moveType = moveType;
+
+
+
+
 
      private void Start()
      {
@@ -25,8 +32,12 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
           yStartPos = transform.position.y;
      }
 
-     internal void MoveCharacter() => transform.DOJump(Jump(), jumpPower, numJumps, duration);
-
+     internal void MoveCharacter()
+     {    
+          if(!GameManagerProjects.Instance.isPlay) return;
+          if (stop) return;
+          transform.DOJump(Jump(), jumpPower, numJumps, duration);
+     }
      private Vector3 Jump() => new Vector3(JumpVector.x, yStartPos, JumpVector.z);
 
      public void Run() => MoveCharacter();
@@ -44,6 +55,14 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
 
      public void ChangeMoveType()
      {
-          throw new System.NotImplementedException();
+
+     }
+
+     public void ScaleMin()
+     {
+          stop = true;
+          transform.DOScale(Vector3.zero, ScaleDuration).OnComplete(()=>{
+               GameManagerProjects.Instance.UpdateGameState(GAMESTATE.VICTORY);
+          });
      }
 }

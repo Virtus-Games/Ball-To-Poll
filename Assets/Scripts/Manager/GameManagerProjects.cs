@@ -41,9 +41,7 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
      public void UpdateGameState(GAMESTATE state)
      {
           gameState = state;
-
-          Debug.Log("Here To");
-
+          
           switch (gameState)
           {
                case GAMESTATE.START:
@@ -52,7 +50,6 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
                     break;
                case GAMESTATE.PLAY:
                     isPlay = true;
-                    Debug.LogWarning("[MenuItemManager 2]");
                     break;
                case GAMESTATE.VICTORY:
                     isPlay = false;

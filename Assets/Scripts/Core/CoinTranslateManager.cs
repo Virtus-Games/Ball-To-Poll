@@ -1,56 +1,60 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
-using GDTools.ObjectPooling;
+using TMPro;
+using System.Collections.Generic;
+using DG.Tweening;
 
 public class CoinTranslateManager : Singleton<CoinTranslateManager>
 {
-    [Header("Settings")]
-    public float distance = 2f;
-    public float Speed = 2f;
-    private int countCount = 0;
-    
-    [Header("Parents")]
-    public Transform coinTransformPointParent;
-    public Transform CoinPrefabUIParent;
-    public Transform CoinPrefabParent;
+     [Header("Settings")]
+     public float distance = 2f;
+     public float Duration = 2f;
+     private int countCount = 0;
 
-    [Header("Pool Objects")]
-    public Pool CoinPrefabUIPool;
-    public Pool CoinPrefabPool;
+     [Header("Parents")]
+     public Transform coinTransformPointParent;
+     public Transform CoinPrefabUIParent;
+     public Transform CoinPrefabParent;
 
-    [Header("Events On Die")]
-    public static UnityAction<bool> onDie;
+     [Header("Pool Objects")]
+     public GameObject StarUIElenments;
+     public TextMeshProUGUI coinElements;
 
-
-    private void OnDisable() => GameManagerProjects.OnGameStateChanged -= OnGameStateChanged;
-    private void OnEnable() => GameManagerProjects.OnGameStateChanged += OnGameStateChanged;
+     [Header("Events On Die")]
+     private List<GameObject> elements;
+     int count = 0;
 
 
-    private void OnGameStateChanged(GAMESTATE obj)
-    {
 
-    }
-
-    public void TransformMoney(Vector2 pos) => StartCoroutine(InstantceAndTranslate(pos));
+     private void OnDisable() => GameManagerProjects.OnGameStateChanged -= OnGameStateChanged;
+     private void OnEnable() => GameManagerProjects.OnGameStateChanged += OnGameStateChanged;
 
 
-    public PoolObject GetPoolObject(Vector3 position) => CoinPrefabUIPool.InstantiateObject(position, CoinPrefabUIParent);
+     private void OnGameStateChanged(GAMESTATE obj)
+     {
+          if (obj == GAMESTATE.START)
+          {
+               for (int i = 0; i < elements.Count; i++)
+                    Destroy(elements[i]);
 
-    IEnumerator InstantceAndTranslate(Vector3 pos)
-    {
+               coinElements.SetText(elements.Count.ToString());
+          }
+     }
 
-        GameObject objx = GetPoolObject(pos).gameObject;
-
-        while (Vector3.Distance(objx.transform.position, coinTransformPointParent.transform.position) > distance)
-        {
-            objx.transform.position = Vector3.Lerp(objx.transform.position, coinTransformPointParent.transform.position, Speed * Time.deltaTime);
-            yield return null;
-        }
+     public void TransformMoney(Vector2 pos) => InstantceAndTranslate(pos);
 
 
-        CoinPrefabUIPool.DestroyObject(objx.GetComponent<PoolObject>(), 0f);
-    }
+     public GameObject GetPoolObject(Vector3 position) => Instantiate(StarUIElenments, CoinPrefabUIParent);
 
-    public void InstantAtZombiePoint(Vector3 pos) => CoinPrefabPool.InstantiateObject(pos, CoinPrefabParent);
+
+     void InstantceAndTranslate(Vector3 pos)
+     {
+          GameObject objx = GetPoolObject(pos).gameObject;
+
+          objx.transform.DOMove(coinTransformPointParent.transform.position, Duration).OnComplete(() =>
+          {
+               elements.Add(objx);
+               coinElements.SetText(elements.Count.ToString());
+          });
+     }
 }

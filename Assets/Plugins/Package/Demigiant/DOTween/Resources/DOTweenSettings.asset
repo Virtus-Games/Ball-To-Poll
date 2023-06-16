@@ -35,13 +35,13 @@ MonoBehaviour:
   debugMode: 0
   debugStoreTargetId: 1
   showPreviewPanel: 1
-  storeSettingsLocation: 0
+  storeSettingsLocation: 1
   modules:
     showPanel: 0
     audioEnabled: 0
     physicsEnabled: 1
     physics2DEnabled: 1
-    spriteEnabled: 0
+    spriteEnabled: 1
     uiEnabled: 0
     textMeshProEnabled: 0
     tk2DEnabled: 0

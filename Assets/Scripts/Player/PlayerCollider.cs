@@ -31,7 +31,7 @@ public class PlayerCollider : Singleton<PlayerCollider>
      {
           foreach (RayCollider item in colliderRays)
           {
-               if (PlayerMovement.Instance.GetMoveType() == item.moveType)
+               if (PlayerMovement.Instance.MoveType == item.moveType)
                     item.GetGroundIsHave();
           }
 

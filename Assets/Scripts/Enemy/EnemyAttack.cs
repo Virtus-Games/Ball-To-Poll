@@ -4,6 +4,7 @@ public class EnemyAttack : MonoBehaviour
 {
 
      private AnimationController enemyAnimation;
+     public float dieTime = 1.2f;
 
      private void Start()
      {
@@ -11,10 +12,10 @@ public class EnemyAttack : MonoBehaviour
      }
      public void Attack(GameObject player)
      {
-          
           enemyAnimation.SetTrigger(enemyAnimation.ATTACK);
           // UI FAİL
-          Destroy(player, 3f);
+          GameManagerProjects.Instance.UpdateGameState(GAMESTATE.DEFEAT);
+          Destroy(player, dieTime);
      }
 
 }
