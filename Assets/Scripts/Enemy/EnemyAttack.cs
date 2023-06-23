@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class EnemyAttack : MonoBehaviour
 {
@@ -12,10 +13,23 @@ public class EnemyAttack : MonoBehaviour
      }
      public void Attack(GameObject player)
      {
+
+          player.GetComponent<PlayerMovement>().stop = true;
+
           enemyAnimation.SetTrigger(enemyAnimation.ATTACK);
-          // UI FAİL
+          
+          StartCoroutine(DieEffect(player));
+
+
+
+     }
+
+     IEnumerator DieEffect(GameObject player)
+     {
+          yield return new WaitForSeconds(dieTime);
+          Destroy(player);
+          yield return new WaitForSeconds(1);
           GameManagerProjects.Instance.UpdateGameState(GAMESTATE.DEFEAT);
-          Destroy(player, dieTime);
      }
 
 }

@@ -1,6 +1,6 @@
 using DG.Tweening;
 using UnityEngine;
-
+using System.Collections;
 
 public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
 {
@@ -14,17 +14,13 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
      [Header("Move Settings")]
      private float yStartPos = 0;
      public Vector3 itemGroundPosition { get => JumpVector; set => JumpVector = value; }
-     [SerializeField] private bool stop = false;
+     internal bool stop = false;
      public float ScaleDuration;
 
      [Header("Move Enum")]
      private MoveType _moveType;
      public MoveType MoveType { get => _moveType; set => _moveType = value; }
      internal void SetMoveType(MoveType moveType) => _moveType = moveType;
-
-
-
-
 
      private void Start()
      {
@@ -68,4 +64,5 @@ public class PlayerMovement : Singleton<PlayerMovement>, IManagerMove
                GameManagerProjects.Instance.UpdateGameState(GAMESTATE.VICTORY);
           });
      }
+
 }

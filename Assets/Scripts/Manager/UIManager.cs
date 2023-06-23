@@ -35,7 +35,7 @@ public class UIManager : Singleton<UIManager>
 
      private void OnDataChanged(PlayerDataContainer arg0)
      {
-          CoinCount.text = PlayerData.playerData.coinCount.ToString();
+          CoinCount.text = PlayerData.container.coinCount.ToString();
      }
 
      private void OnDisable()
@@ -68,7 +68,7 @@ public class UIManager : Singleton<UIManager>
 
           if (obj == GAMESTATE.START)
           {
-               CoinCount.text = PlayerData.playerData.coinCount.ToString();
+               CoinCount.text = PlayerData.container.coinCount.ToString();
                StartCoroutine(ShowNoThanksButton(false, 0));
                PanelController(HomePanel);
           }
@@ -83,10 +83,13 @@ public class UIManager : Singleton<UIManager>
           {
             
                WinText.text = GameManagerProjects.Instance.CurrentLevelCoin.ToString();
-               WinText2x.text = (GameManagerProjects.Instance.CurrentLevelCoin * 2).ToString();
+               WinText2x.text =  "+ " + (GameManagerProjects.Instance.CurrentLevelCoin * 2).ToString();
                PanelController(WinPanel);
 
                StartCoroutine(ShowNoThanksButton(true, 3f));
+
+               PlayerData.container.coinCount += GameManagerProjects.Instance.CurrentLevelCoin;
+               PlayerData.Instance.Save();
           }
 
           if (obj == GAMESTATE.DEFEAT)

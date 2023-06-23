@@ -24,12 +24,12 @@ public class LevelManager : Singleton<LevelManager>
 
      internal int GetLevelIndex()
      {
-          return PlayerData.playerData.currentLevel;
+          return PlayerData.container.currentLevel;
      }
 
      internal void LevelLoad()
      {
-          currentLevel = PlayerData.playerData.currentLevel;
+          currentLevel = PlayerData.container.currentLevel;
           LoadinigBarControl(true);
 
           SceneLoader(currentLevel.ToString());
@@ -48,7 +48,7 @@ public class LevelManager : Singleton<LevelManager>
           if (currentLevel >= SceneManager.sceneCountInBuildSettings)
                currentLevel = 1;
 
-          PlayerData.playerData.currentLevel = currentLevel;
+          PlayerData.container.currentLevel = currentLevel;
           PlayerData.Instance.Save();
           SceneLoader(currentLevel.ToString());
      }

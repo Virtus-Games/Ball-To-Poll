@@ -12,29 +12,29 @@ public class PlayerDataContainer
 public class PlayerData : Singleton<PlayerData>
 {
     private const string Filename = "playerData.dat";
-    public static PlayerDataContainer playerData;
+    public static PlayerDataContainer container;
     public static UnityAction<PlayerDataContainer> onDataChanged;
 
 
     [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
-    static void BeforeAwake() => playerData = BinarySerializer.Load<PlayerDataContainer>(Filename);
+    static void BeforeAwake() => container = BinarySerializer.Load<PlayerDataContainer>(Filename);
 
 
 
 
-    private void Awake() => onDataChanged?.Invoke(playerData);
+    private void Awake() => onDataChanged?.Invoke(container);
 
     public void Save()
     {
-        BinarySerializer.Save(playerData, Filename);
-        onDataChanged?.Invoke(playerData);
+        BinarySerializer.Save(container, Filename);
+        onDataChanged?.Invoke(container);
     }
 
     public void Load()
     {
         PlayerDataContainer player = BinarySerializer.Load<PlayerDataContainer>(Filename);
-        playerData = player;
-        onDataChanged?.Invoke(playerData);
+        container = player;
+        onDataChanged?.Invoke(container);
     }
 
 }

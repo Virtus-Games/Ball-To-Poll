@@ -11,7 +11,7 @@ public class EnemyMovement : MonoBehaviour, IManagerMove
 
      private Vector3 _itemGroundPosition;
      public Vector3 itemGroundPosition { get => _itemGroundPosition; set => _itemGroundPosition = value; }
-     
+
      private MoveType _moveType;
      public MoveType MoveType { get => _moveType; set => _moveType = value; }
 
@@ -23,8 +23,8 @@ public class EnemyMovement : MonoBehaviour, IManagerMove
 
      internal void Move()
      {
-          if(!GameManagerProjects.Instance.isPlay) return;
-          
+          if (!GameManagerProjects.Instance.isPlay) return;
+
           switch (_moveType)
           {
                case MoveType.FORWARD:
@@ -59,18 +59,19 @@ public class EnemyMovement : MonoBehaviour, IManagerMove
           if (IsCharackter())
           {
                animationController.Idle();
-
-               enemyCollider.Stop = true;
-
-               Vector3 myRot = transform.rotation.eulerAngles;
-               myRot.y += 180;
-
-               transform.DORotate(myRot, Duration, RotateMode.Fast).OnComplete(() =>
-               {
-                    enemyCollider.Stop = false;
-                    Stop();
-               });
           }
+
+          enemyCollider.Stop = true;
+
+          Vector3 myRot = transform.rotation.eulerAngles;
+          myRot.y += 180;
+
+          transform.DORotate(myRot, Duration, RotateMode.Fast).OnComplete(() =>
+          {
+               enemyCollider.Stop = false;
+               Stop();
+          });
+
      }
 
      public void ChangeMoveType()

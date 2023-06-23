@@ -37,7 +37,7 @@ public class CoinTranslateManager : Singleton<CoinTranslateManager>
                for (int i = 0; i < elements.Count; i++)
                     Destroy(elements[i]);
 
-               coinElements.SetText(elements.Count.ToString());
+               coinElements.SetText("0");
           }
      }
 
@@ -54,7 +54,8 @@ public class CoinTranslateManager : Singleton<CoinTranslateManager>
           objx.transform.DOMove(coinTransformPointParent.transform.position, Duration).OnComplete(() =>
           {
                elements.Add(objx);
-               coinElements.SetText(elements.Count.ToString());
+               GameManagerProjects.Instance.CurrentLevelCoin += 25;
+               coinElements.SetText((GameManagerProjects.Instance.CurrentLevelCoin).ToString());
           });
      }
 }

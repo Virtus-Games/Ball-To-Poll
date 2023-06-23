@@ -21,7 +21,7 @@ public class MenuItemManager : MonoBehaviour
      // Victory Panel -> Next Level Compoenet Button
      public void LevelLoader()
      {
-          LevelManager.Instance.SceneLoader(PlayerData.playerData.currentLevel.ToString());
+          LevelManager.Instance.SceneLoader(PlayerData.container.currentLevel.ToString());
           GameManagerProjects.Instance.UpdateGameState(GAMESTATE.START);
      }
 
@@ -76,7 +76,7 @@ public class MenuItemManager : MonoBehaviour
 
      public void NextLevelButton()
      {
-          PlayerData.playerData.coinCount += GameManagerProjects.Instance.CurrentLevelCoin;
+          PlayerData.container.coinCount += GameManagerProjects.Instance.CurrentLevelCoin;
           PlayerData.Instance.Save();
           LevelManager.Instance.SetLevelUp();
 

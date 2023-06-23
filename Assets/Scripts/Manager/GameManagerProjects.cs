@@ -32,7 +32,7 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
      public int CurrentLevelCoin
      {
           get { return _currentLevelCoin; }
-          set { _currentLevelCoin += value; }
+          set { _currentLevelCoin = value; }
      }
 
 
@@ -46,6 +46,7 @@ public class GameManagerProjects : Singleton<GameManagerProjects>
           {
                case GAMESTATE.START:
                     HandleStartAction();
+                    CurrentLevelCoin = 0;
                     isPlay = false;
                     break;
                case GAMESTATE.PLAY:
