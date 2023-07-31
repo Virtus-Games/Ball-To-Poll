@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 7601759338272662645}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -131,14 +131,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e35d716ad795b643a8bafd38b9a13c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 1
-  moveDistance: 5
-  Rb: {fileID: 7601759338272662645}
-  bounds: {fileID: 0}
   duration: 0.2
   numJumps: 1
   jumpPower: 2
-  jmpVector: {x: 0, y: 0, z: 0}
+  ScaleDuration: 0
 --- !u!114 &185481895847809928
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,11 +148,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceX: 1
-  distanceY: 1
+  distanceZ: 0
+  yDistance: 2
   colliderRay: {fileID: 7533853651419559492, guid: c99749318d3aeae48ac2bf9feffc6831,
     type: 3}
   colliderRays: []
-  yDistance: 2
 --- !u!135 &798667596932940312
 SphereCollider:
   m_ObjectHideFlags: 0

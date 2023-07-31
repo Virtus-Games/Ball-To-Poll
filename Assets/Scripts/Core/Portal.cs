@@ -1,35 +1,53 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-     public Vector3 originalPosition;
-     public Portal otherPortal;
-     public bool IsConnected = false;
+    public Transform destinationPortal; // Diğer portalın Transform bileşeni
+    private bool playerInsidePortal = false; // Oyuncunun portalın içinde olup olmadığını takip eder
+    private bool canTeleport = true; // Geçiş yapılabilirlik durumu
+    public float teleportCooldown = 2f; // Geçiş arasındaki bekleme süresi
 
-     private void Start() => IsConnected = false;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (canTeleport)
+            {
+                playerInsidePortal = true;
+            }
+        }
+    }
 
-     private void OnTriggerEnter(Collider other)
-     {
-          if (other.TryGetComponent(out PlayerMovement player) && !IsConnected)
-          {
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            playerInsidePortal = false;
+        }
+    }
 
-               IsConnected = true;
-               otherPortal.IsConnected = true;
+    private void Update()
+    {
+        if (playerInsidePortal && canTeleport) // E tuşuna basıldığında geçiş yapar
+        {
+            Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+            Vector3 destinationPosition = destinationPortal.position;
+            Quaternion destinationRotation = destinationPortal.rotation;
 
-               Debug.Log("Here");
+            player.position = destinationPosition;
+            player.rotation = destinationRotation;
 
-               
+            StartCoroutine(TeleportCooldown()); // Teleport bekleme süresini başlatır
+        }
+    }
 
+    private IEnumerator TeleportCooldown()
+    {
+        canTeleport = false; // Geçiş yapılamaz durumda
 
-          }
-     }
+        yield return new WaitForSeconds(teleportCooldown);
 
-     private void OnTriggerExit(Collider other)
-     {
-          if (other.TryGetComponent(out PlayerMovement player) && IsConnected)
-          {
-          }
-     }
+        canTeleport = true; // Geçiş yapılabilir duruma döner
+    }
 }

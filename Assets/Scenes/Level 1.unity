@@ -1173,9 +1173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6257bddd6a447948b51503009f2de9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPosition: {x: 0, y: 0, z: 0}
-  otherPortal: {fileID: 1618106806}
-  IsConnected: 0
+  destinationPortal: {fileID: 1618106805}
+  teleportCooldown: 2
 --- !u!65 &707616572
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3207,9 +3206,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6257bddd6a447948b51503009f2de9c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  originalPosition: {x: 0, y: 0, z: 0}
-  otherPortal: {fileID: 674228635}
-  IsConnected: 0
+  destinationPortal: {fileID: 674228633}
+  teleportCooldown: 2
 --- !u!1001 &1721096902
 PrefabInstance:
   m_ObjectHideFlags: 0
